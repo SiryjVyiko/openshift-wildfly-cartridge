@@ -5,7 +5,7 @@ Description: "The leading open source Java EE7 application server for enterprise
 Version: '8'
 License: LGPL
 License-Url: http://www.gnu.org/copyleft/lesser.txt
-Source-Url: https://github.com/jelastic-public-cartridges/openshift-wildfly-cartridge.git
+Source-Url: https://github.com/SiryjVyiko/openshift-wildfly-cartridge.git
 Vendor: WildFly
 Cartridge-Version: '0.0.5'
 Cartridge-Vendor: wildfly
