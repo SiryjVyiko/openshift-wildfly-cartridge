@@ -1,6 +1,7 @@
 #!/bin/bash -eu
 
-sed -i 's/opt\/repo:\/bin\/bash/opt\/repo\/home:\/bin\/bash/g' "/etc/passwd"
 #if [ -e $OPENSHIFT_WILDFLY_DIR/standalone/deployments/ROOT.war ]; then
 #    cp $OPENSHIFT_WILDFLY_DIR/standalone/deployments/ROOT.war $OPENSHIFT_REPO_DIR/deployments
 #fi
+
+sed -i 's/opt\/repo:\/bin\/bash/opt\/repo\/home:\/bin\/bash/g' "/etc/passwd"

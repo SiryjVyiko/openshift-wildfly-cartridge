@@ -1,29 +1,13 @@
 #!/bin/bash -eu
 
-
 case "$1" in
   -v|--version)
     version="$2"
 esac
 
 # Create additional directories required by JBOSSAS
-mkdir -p ${OPENSHIFT_WILDFLY_DIR}/{template,pid,logs,standalone/tmp,standalone/deployments,standalone/configuration,standalone/log,standalone/data}
-
-# This should be removed once OpenShift provides support for JDK 8
+mkdir -p ${OPENSHIFT_WILDFLY_DIR}/{pid,logs}
 mkdir -p $OPENSHIFT_WILDFLY_DIR/usr/lib/jvm
 
-# Copy the version specific files up to jbossas directory
-cp -r ${OPENSHIFT_WILDFLY_DIR}versions/${version}/standalone/configuration/* ${OPENSHIFT_WILDFLY_DIR}standalone/configuration
-cp -r ${OPENSHIFT_WILDFLY_DIR}versions/${version}/bin/* ${OPENSHIFT_WILDFLY_DIR}/bin
-cp -r ${OPENSHIFT_WILDFLY_DIR}versions/${version}/* ${OPENSHIFT_WILDFLY_DIR}/
-
 # Initialize the JBoss CLI history file
-[ -f ${OPENSHIFT_WILDFLY_DIR}/.jboss-cli-history ] || touch ${OPENSHIFT_WILDFLY_DIR}/.jboss-cli-history
-
-mkdir -p $OPENSHIFT_WILDFLY_DIR/jboss_cfg_backup
-cp -n ${OPENSHIFT_WILDFLY_DIR}/versions/${version}/standalone/configuration/standalone.xml $OPENSHIFT_WILDFLY_DIR/jboss_cfg_backup/standalone.xml
-
-ln -s ${OPENSHIFT_WILDFLY_DIR}versions/${version}/jboss-modules.jar ${OPENSHIFT_WILDFLY_DIR}/jboss-modules.jar
-ln -s ${OPENSHIFT_WILDFLY_DIR}/versions/${version}/standalone ${OPENSHIFT_WILDFLY_DIR}/standalone
-ln -s ${OPENSHIFT_WILDFLY_DIR}/versions/${version}/modules ${OPENSHIFT_WILDFLY_DIR}/modules
-
+[ -f ${OPENSHIFT_WILDFLY_DIR}/versions/8/.jboss-cli-history ] || touch ${OPENSHIFT_WILDFLY_DIR}/versions/8/.jboss-cli-history

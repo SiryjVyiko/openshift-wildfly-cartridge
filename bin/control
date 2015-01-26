@@ -1,17 +1,21 @@
 #!/bin/bash -e
 
+source /etc/jelastic/environment
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 export JAVA_HOME="/usr/java/default/"
 
 # Secret token should be used for configuring JBoss cluster, please set unique token for your cluster
 export OPENSHIFT_SECRET_TOKEN="thisisasecrettoken"
 
-WILDFLY_BIN_DIR=${OPENSHIFT_WILDFLY_DIR}/versions/8/bin
-WILDFLY_PID_FILE=${OPENSHIFT_WILDFLY_DIR}/pid/jbossas.pid
+JBOSS_HOME="/opt/repo/versions/8"
+OPENSHIFT_WILDFLY_DIR="/opt/repo/versions/8/"
+
+WILDFLY_BIN_DIR=${OPENSHIFT_WILDFLY_DIR}/bin
+WILDFLY_PID_FILE=/opt/repo/pid/jbossas.pid
 WILDFLY_DEPLOYMENTS_DIR=${OPENSHIFT_WILDFLY_DIR}/standalone/deployments
 SCANCONFIG=""
 
-source $OPENSHIFT_WILDFLY_DIR/bin/util
+source /opt/repo/bin/util
 
 cartridge_type="wildfly"
 
@@ -293,7 +297,7 @@ function start() {
   if isrunning; then
       echo "Application is already running"
   else
-    ${WILDFLY_BIN_DIR}/standalone.sh -b $OPENSHIFT_WILDFLY_IP -bmanagement=$OPENSHIFT_WILDFLY_IP > $OPENSHIFT_WILDFLY_DIR/logs/server.log 2>&1 &
+    ${WILDFLY_BIN_DIR}/standalone.sh -b $OPENSHIFT_WILDFLY_IP -bmanagement=$OPENSHIFT_WILDFLY_IP > /opt/repo/logs/server.log 2>&1 &
     PROCESS_ID=$!
     echo "$PROCESS_ID" > ${WILDFLY_PID_FILE}
 
