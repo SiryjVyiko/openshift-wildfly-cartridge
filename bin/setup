@@ -16,3 +16,4 @@ export keypass=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;`
 ./keytool -genkeypair -alias serverkey -keyalg RSA -keysize 2048 -validity 7360 -keystore server.keystore -keypass $keypass -storepass $keypass -dname "cn=Server Administrator,o=Acme,c=GB";
 mv /usr/java/latest/bin/server.keystore ${OPENSHIFT_WILDFLY_DIR}/versions/8/standalone/configuration/
 chown jelastic:jelastic ${OPENSHIFT_WILDFLY_DIR}/versions/8/standalone/configuration/server.keystore
+sed -i s/mypassword/$keypass/ ${OPENSHIFT_WILDFLY_DIR}/versions/8/standalone/configuration/standalone.xml
