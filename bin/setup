@@ -12,7 +12,7 @@ mkdir -p $OPENSHIFT_WILDFLY_DIR/usr/lib/jvm
 # Initialize the JBoss CLI history file
 [ -f ${OPENSHIFT_WILDFLY_DIR}/versions/8/.jboss-cli-history ] || touch ${OPENSHIFT_WILDFLY_DIR}/versions/8/.jboss-cli-history
 cd /usr/java/latest/bin
-keypass=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;`
+keypass=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`;
 ./keytool -genkeypair -alias serverkey -keyalg RSA -keysize 2048 -validity 7360 -keystore server.keystore -keypass $keypass -storepass $keypass -dname "cn=Server Administrator,o=Acme,c=GB";
 mv /usr/java/latest/bin/server.keystore ${OPENSHIFT_WILDFLY_DIR}/versions/8/standalone/configuration/
 chown jelastic:jelastic ${OPENSHIFT_WILDFLY_DIR}/versions/8/standalone/configuration/server.keystore
