@@ -49,11 +49,6 @@
                 <authorization>
                     <properties path="application-roles.properties" relative-to="jboss.server.config.dir"/>
                 </authorization>
-                <server-identities>
-                    <ssl>
-                        <keystore path="server.keystore" relative-to="jboss.server.config.dir" keystore-password="mypassword" alias="serverkey"/>
-                    </ssl>
-                </server-identities>
             </security-realm>
         </security-realms>
         <audit-log>
@@ -71,15 +66,14 @@
         </audit-log>
         <management-interfaces>
             <http-interface security-realm="ManagementRealm" http-upgrade-enabled="true">
-                <socket-binding https="management-https"/>
+                <socket-binding http="management-http"/>
             </http-interface>
         </management-interfaces>
-        <access-control provider="rbac">
+        <access-control provider="simple">
             <role-mapping>
                 <role name="SuperUser">
                     <include>
                         <user name="$local"/>
-                        <user name="admin"/>
                     </include>
                 </role>
             </role-mapping>
