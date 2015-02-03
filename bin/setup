@@ -9,9 +9,9 @@ esac
 mkdir -p ${OPENSHIFT_WILDFLY_DIR}/{pid,logs}
 mkdir -p $OPENSHIFT_WILDFLY_DIR/usr/lib/jvm
 
-/sbin/iptables -t nat -I PREROUTING -p tcp -m tcp --dport 4949 -j REDIRECT --to-ports 9990
-/sbin/iptables -t nat -I PREROUTING -p tcp -m tcp --dport 4848 -j REDIRECT --to-ports 9993
-/sbin/iptables save
+#/sbin/iptables -t nat -I PREROUTING -p tcp -m tcp --dport 4949 -j REDIRECT --to-ports 9990
+#/sbin/iptables -t nat -I PREROUTING -p tcp -m tcp --dport 4848 -j REDIRECT --to-ports 9993
+#/sbin/iptables save
 
 # Initialize the JBoss CLI history file
 [ -f ${OPENSHIFT_WILDFLY_DIR}/versions/8/.jboss-cli-history ] || touch ${OPENSHIFT_WILDFLY_DIR}/versions/8/.jboss-cli-history
