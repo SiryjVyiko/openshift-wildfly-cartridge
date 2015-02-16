@@ -21,3 +21,9 @@ service iptables save
 #mv /usr/java/latest/bin/server.keystore ${OPENSHIFT_WILDFLY_DIR}/versions/8/standalone/configuration/
 #chown jelastic:jelastic ${OPENSHIFT_WILDFLY_DIR}/versions/8/standalone/configuration/server.keystore
 #sed -i s/mypassword/$keypass/ ${OPENSHIFT_WILDFLY_DIR}/versions/8/standalone/configuration/standalone.xml
+
+sed -i 's/opt\/repo:\/bin\/bash/opt\/repo\/home:\/bin\/bash/g' "/etc/passwd"
+
+if [ -d "/opt/repo/.ssh" ] ; then
+    mv /opt/repo/.ssh /opt/repo/home/
+fi
